@@ -1,4 +1,4 @@
-package com.meghalayaads.allads.ui.gallery;
+package com.meghalayaads.allads.activity.ui.gallery;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
