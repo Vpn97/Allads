@@ -18,6 +18,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -46,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/font"
+                    android:fontFamily="@font/popin"
                     android:text="@string/all_ads"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="42sp"
@@ -62,107 +63,108 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/crdGoogle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtUserId"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/sign_button_hight"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/google_btn"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
-                android:maxWidth="200dp"
-                app:layout_constraintBottom_toTopOf="@+id/crdFacebook"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/crdFacebook"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sign_button_hight"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:maxWidth="200dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/facebook_btn"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="2dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView"
+                app:counterMaxLength="6"
+                app:layout_constraintBottom_toTopOf="@+id/txtPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-            </androidx.cardview.widget.CardView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sign_up_field_higth"
+                    android:fontFamily="@font/popin"
+                    android:hint="@string/user_mobile_number"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sign_up_field_higth"
+                    android:fontFamily="@font/popin"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/popin"
                 android:text="@string/login_with"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintBottom_toTopOf="@+id/txtUserId"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnSignIn"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/sign_button_hight"
+                android:layout_margin="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/popin"
+                android:text="@string/sign_in"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <Button
+                android:id="@+id/btnSignUp"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/sign_button_hight"
+                android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:clipToPadding="false"
-                android:clipChildren="false"
-                android:maxWidth="200dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_shape"
+                android:fontFamily="@font/popin"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <Button
-                    android:id="@+id/btnSignUp"
-                    style="@style/AppTheme.RoundedCornerMaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/sign_button_hight"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_shape"
-                    android:fontFamily="@font/popin"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/btnSignIn"
-                    style="@style/AppTheme.RoundedCornerMaterialButton"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/sign_button_hight"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/round_shape"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/popin"
-                    android:text="@string/sign_in"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
