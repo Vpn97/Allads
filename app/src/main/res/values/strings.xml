@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="all_ads">Allads</string>
+    <string name="login_with">Login with</string>
+    <string name="sign_in">Sign in</string>
+    <string name="all_ads_comp_name">MEGHALAYA ALL ADVERTISEMENTS</string>
 </resources>
