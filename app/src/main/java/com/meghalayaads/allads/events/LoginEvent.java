@@ -8,5 +8,6 @@ public interface LoginEvent {
 
     public void onLoginSuccess();
     public void onLoginFail();
-
+    
+     public void onLoginFailUPDate();
 }
