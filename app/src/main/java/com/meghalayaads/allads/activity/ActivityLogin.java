@@ -17,5 +17,11 @@ public class ActivityLogin extends AppCompatActivity {
        setEvent();
     }
 
+    private void setEvent() {
 
+    }
+
+    private void allocation() {
+
+    }
 }
