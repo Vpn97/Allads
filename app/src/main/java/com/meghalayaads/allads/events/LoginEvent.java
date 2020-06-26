@@ -11,4 +11,6 @@ public interface LoginEvent {
 
     public void onLoginFailCkeck();
 
+
+     public void onLoginFailUPDate();
 }
