@@ -8,6 +8,8 @@ public interface LoginEvent {
 
     public void onLoginSuccess();
     public void onLoginSFail();
+    
+     public void onLoginSFailApkZube();
 
 
 }
