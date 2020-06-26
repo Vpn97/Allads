@@ -7,9 +7,6 @@ package com.meghalayaads.allads.events;
 public interface LoginEvent {
 
     public void onLoginSuccess();
-    public void onLoginSFail();
-    
-     public void onLoginSFailApkZube();
-
+    public void onLoginFail();
 
 }
