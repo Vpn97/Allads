@@ -10,4 +10,9 @@ public interface LoginEvent {
     public void onLoginFail();
     
      public void onLoginFailUPDate();
+    
+     public void onLoginSuccess();
+    public void onLoginFail();
+    
+     public void onLoginFailUPDate();
 }
