@@ -1,4 +1,4 @@
-package com.meghalayaads.allads.model;
+package com.meghalayaads.allads.user.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package com.meghalayaads.allads.events;
+package com.meghalayaads.allads.user.events;
 
 /**
  * Allads

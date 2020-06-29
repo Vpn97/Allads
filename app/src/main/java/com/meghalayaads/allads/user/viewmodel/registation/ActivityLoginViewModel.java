@@ -1,4 +1,4 @@
-package com.meghalayaads.allads.viewmodel;
+package com.meghalayaads.allads.user.viewmodel.registation;
 
 import android.app.Application;
 
@@ -6,17 +6,18 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.meghalayaads.allads.model.LoginModel;
+import com.meghalayaads.allads.user.model.LoginModel;
+
 
 /**
  * Allads
  * Created by Vishal Nagvadiya on 24-06-2020.
  */
-public class ActivityLoginViewMode extends AndroidViewModel {
+public class ActivityLoginViewModel extends AndroidViewModel {
     private Application application;
     private MutableLiveData<LoginModel> loginModelData=new MutableLiveData<>();
 
-    public ActivityLoginViewMode(@NonNull Application application) {
+    public ActivityLoginViewModel(@NonNull Application application) {
         super(application);
         this.application=application;
     }

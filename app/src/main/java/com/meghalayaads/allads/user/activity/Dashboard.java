@@ -1,4 +1,4 @@
-package com.meghalayaads.allads.activity;
+package com.meghalayaads.allads.user.activity;
 
 import android.os.Bundle;
 import android.view.Menu;

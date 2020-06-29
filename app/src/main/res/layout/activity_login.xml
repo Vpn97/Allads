@@ -6,13 +6,13 @@
     <data>
         <variable
             name="model"
-            type="com.meghalayaads.allads.viewmodel.ActivityLoginViewMode" />
+            type="com.meghalayaads.allads.user.viewmodel.registation.ActivityLoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.registration.LoginActivity">
+        tools:context=".user.activity.registration.LoginActivity">
 
         <FrameLayout
             android:id="@+id/frameLayout"
