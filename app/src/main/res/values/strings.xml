@@ -26,4 +26,18 @@
     <string name="enter_user_name">Enter valid user name</string>
     <string name="password_can_be">password length should be between 6 and 20</string>
     <string name="password_not_match">password doesn\'t match</string>
+    <string name="otp">OTP</string>
+    <string name="verify_otp_msg">Verify your mobile number</string>
+    <string name="varificatiion_sub_msg">Enter OTP just send you on : </string>
+    <string name="edit_mobile_number">edit mobile number</string>
+    <string name="verify">Verify</string>
+    <string name="confirm">Confirm</string>
+    <string name="resend">resend</string>
+    <string name="resend_otp_msg">didn\'t receive OTP?</string>
+    <string name="not_valid_moible_number">phone number is not valid.</string>
+    <string name="opt_wrong">verification failed, Invalid otp</string>
+    <string name="error_quota_exceeded">The SMS quota for the project has been exceeded</string>
+    <string name="key_user_login_data">key_user_login_data</string>
+    <string name="mobie_no_already_reg">mobile already register with allads</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
 </resources>

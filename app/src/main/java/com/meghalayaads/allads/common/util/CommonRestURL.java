@@ -14,4 +14,9 @@ public class CommonRestURL {
     //common
     public static final String GET_USER_TYPES="common/getUserTypes.php";
 
+
+    //registration
+    public static final String REG_USER_MST="registration/regUserMst.php";
+
+
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "237381933974",
+    "firebase_url": "https://all-ads-5b880.firebaseio.com",
+    "project_id": "all-ads-5b880",
+    "storage_bucket": "all-ads-5b880.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237381933974:android:93f20ceba3f40d26915bb7",
+        "android_client_info": {
+          "package_name": "com.meghalayaads.allads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237381933974-7lmqb5tfrpl34grtdp06jmfukb10i3b9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWObt5rg7QbMjKWZd6vQQaIi63eIDNuTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237381933974-7lmqb5tfrpl34grtdp06jmfukb10i3b9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

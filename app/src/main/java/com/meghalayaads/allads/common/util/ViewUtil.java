@@ -23,6 +23,17 @@ public class ViewUtil {
     }
 
 
+    public static void setVisibility(View view, int visibility) {
+        view.setVisibility(visibility);
+        if ( view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup)view;
+            for ( int idx = 0 ; idx < group.getChildCount() ; idx++ ) {
+                setVisibility(group.getChildAt(idx), visibility);
+            }
+        }
+    }
+
+
     public static PopupWindow getProgressDialLog(View root, LayoutInflater inflater){
         View popupView = inflater.inflate(R.layout.dailog_progressbar_layout, null);
         int width = LinearLayout.LayoutParams.MATCH_PARENT;

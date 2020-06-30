@@ -18,8 +18,12 @@ import com.meghalayaads.allads.common.util.Error;
 import com.meghalayaads.allads.user.activity.registration.ActivitySignUp;
 import com.meghalayaads.allads.user.events.OnSignUpEvent;
 import com.meghalayaads.allads.user.model.SignUpModel;
+import com.meghalayaads.allads.user.response.registration.UserRegResponse;
+import com.meghalayaads.allads.user.service.registration.RegistrationService;
+import com.meghalayaads.allads.user.service.registration.RegistrationServiceImpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,13 +36,54 @@ import retrofit2.Response;
 public class ActivitySignUpViewModel extends AndroidViewModel {
     private Application application;
     private MutableLiveData<ArrayList<UserType>> userTypesLiveData = new MutableLiveData<>();
-    private MutableLiveData<SignUpModel> signUpLiveData = new MutableLiveData<>();
+    private MutableLiveData<SignUpModel> signUpLiveData=new MutableLiveData<>();
     private OnSignUpEvent event;
+    private MutableLiveData<String> otp = new MutableLiveData<>();
+    private MutableLiveData<String> count = new MutableLiveData<>();
 
     public ActivitySignUpViewModel(@NonNull Application application) {
         super(application);
         this.application = application;
         signUpLiveData.setValue(new SignUpModel());
+    }
+
+
+    public void registerUser() {
+
+        if (validateUserData()) {
+            RegistrationService registrationService = RegistrationServiceImpl.getService();
+            HashMap<String, String> map = new HashMap<>();
+            map.put("mob_no", signUpLiveData.getValue().getMobileNumber());
+            map.put("user_name", signUpLiveData.getValue().getUserName());
+            map.put("password", signUpLiveData.getValue().getPassword());
+            map.put("device_id", signUpLiveData.getValue().getDeviceId());
+
+            registrationService.registerUserMaster(map).enqueue(new Callback<UserRegResponse>() {
+                @Override
+                public void onResponse(Call<UserRegResponse> call, Response<UserRegResponse> response) {
+                    if (null != response.body() &&
+                            response.body().isStatus() &&
+                            response.body().getUser() != null &&
+                            (response.body().getErrors() == null || response.body().getErrors().isEmpty())) {
+
+                        event.onRegistrationSuccess(response.body());
+                    } else {
+
+                        event.onRegistrationFail(response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserRegResponse> call, Throwable t) {
+                    ArrayList<Error> errors=new ArrayList<>();
+                    errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG005.toString(),t.getMessage(),"REG"));
+                    UserRegResponse regResponse=new UserRegResponse();
+                    regResponse.setStatus(false);
+                    regResponse.setErrors(errors);
+                    event.onRegistrationSuccess(regResponse);
+                }
+            });
+        }
     }
 
 
@@ -130,5 +175,21 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
 
     public void setEvent(OnSignUpEvent event) {
         this.event = event;
+    }
+
+    public MutableLiveData<String> getOtp() {
+        return otp;
+    }
+
+    public void setOtp(MutableLiveData<String> otp) {
+        this.otp = otp;
+    }
+
+    public MutableLiveData<String> getCount() {
+        return count;
+    }
+
+    public void setCount(MutableLiveData<String> count) {
+        this.count = count;
     }
 }

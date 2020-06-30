@@ -19,18 +19,20 @@ public class SignUpModel extends BaseObservable implements Parcelable {
     private String Password;
     private String confirmPassword;
     private String userType;
+    private String deviceId;
+
+    public SignUpModel() {
+    }
 
 
-    public SignUpModel(String mobileNumber, String userName, String password, String confirmPassword, String userType) {
+
+    public SignUpModel(String mobileNumber, String userName, String password, String confirmPassword, String userType, String deviceId) {
         this.mobileNumber = mobileNumber;
         this.userName = userName;
         Password = password;
         this.confirmPassword = confirmPassword;
         this.userType = userType;
-    }
-
-
-    public SignUpModel() {
+        this.deviceId = deviceId;
     }
 
     protected SignUpModel(Parcel in) {
@@ -39,6 +41,7 @@ public class SignUpModel extends BaseObservable implements Parcelable {
         Password = in.readString();
         confirmPassword = in.readString();
         userType = in.readString();
+        deviceId = in.readString();
     }
 
     @Override
@@ -48,6 +51,7 @@ public class SignUpModel extends BaseObservable implements Parcelable {
         dest.writeString(Password);
         dest.writeString(confirmPassword);
         dest.writeString(userType);
+        dest.writeString(deviceId);
     }
 
     @Override
@@ -114,5 +118,16 @@ public class SignUpModel extends BaseObservable implements Parcelable {
 
     public void setUserType(String userType) {
         this.userType = userType;
+        notifyPropertyChanged(BR.userType);
+    }
+
+    @Bindable
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+        notifyPropertyChanged(BR.deviceId);
     }
 }
