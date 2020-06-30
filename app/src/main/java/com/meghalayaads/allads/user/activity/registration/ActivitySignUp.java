@@ -179,7 +179,8 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                     mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(false);
                     if(mBinding.bottomSheetOTP.txtOtp.getEditText().getText() != null &&
                             !TextUtils.isEmpty(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())
-                            && !TextUtils.isDigitsOnly(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())) {
+                            && TextUtils.isDigitsOnly(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())) {
+
                         signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(
                                 mVerificationId,
                                 mBinding.bottomSheetOTP.txtOtp.toString().trim()));
