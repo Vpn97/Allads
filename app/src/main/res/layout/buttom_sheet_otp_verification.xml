@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomSheetRoot"
-        style="?attr/bottomSheetStyle"
         android:layout_width="match_parent"
+        style="@style/CustomBottomSheet"
         android:layout_height="match_parent"
         app:layout_behavior="@string/bottom_sheet_behavior">
 

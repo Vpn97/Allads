@@ -16,7 +16,7 @@ public class UserMst implements Parcelable {
     @SerializedName("uid")
     private int uid;
 
-    @SerializedName("mob_id")
+    @SerializedName("mob_no")
     private String mobileNum;
 
     @SerializedName("user_name")

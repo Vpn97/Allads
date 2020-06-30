@@ -80,9 +80,10 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
 
     private void setEvent() {
 
+        mBinding.txtAlreadyAccount.setOnClickListener(v->{backToLogin(null);});
+
         mBinding.btnSignUp.setOnClickListener(view -> {
             if (model.validateUserData()) {
-                removeErrorUI();
                 ViewUtil.setVisibility(mBinding.rootCons, View.INVISIBLE);
                 mBinding.progressBar.setVisibility(View.VISIBLE);
                 mBinding.bottomSheetOTP.txtResend.setEnabled(false);
@@ -121,10 +122,11 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
 
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
-                    mBinding.txtError.setError(getString(R.string.error_quota_exceeded));
+                   // mBinding.txtError.setText(getString(R.string.error_quota_exceeded));
+                    mBinding.txtError.setText(e.getMessage());
                     mBinding.txtError.setVisibility(View.VISIBLE);
                 } else {
-                    mBinding.txtError.setError(e.getMessage());
+                    mBinding.txtError.setText(e.getMessage());
                 }
             }
 
@@ -180,10 +182,8 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                     if(mBinding.bottomSheetOTP.txtOtp.getEditText().getText() != null &&
                             !TextUtils.isEmpty(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())
                             && TextUtils.isDigitsOnly(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())) {
-
-                        signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(
-                                mVerificationId,
-                                mBinding.bottomSheetOTP.txtOtp.toString().trim()));
+                        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, mBinding.bottomSheetOTP.txtOtp.getEditText().getText().toString().trim());
+                        signInWithPhoneAuthCredential(credential);
                     } else {
                         mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(true);
                         mBinding.bottomSheetOTP.txtOtp.setError(getString(R.string.opt_wrong));
@@ -233,7 +233,8 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(true);
-                            mBinding.bottomSheetOTP.txtOtp.setError(getString(R.string.opt_wrong));
+                           // mBinding.bottomSheetOTP.txtOtp.setError(getString(R.string.opt_wrong));
+                            mBinding.bottomSheetOTP.txtOtp.setError(task.getException().getMessage());
                             ViewUtil.setVisibility(mBinding.rootCons, View.VISIBLE);
                             mBinding.progressBar.setVisibility(View.GONE);
                         }
@@ -242,9 +243,11 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
     }
 
     private void backToLogin(UserMst userMst) {
-        Intent data = new Intent();
-        data.putExtra(getString(R.string.key_user_login_data), userMst);
-        setResult(RESULT_OK, data);
+        if(userMst!=null) {
+            Intent data = new Intent();
+            data.putExtra(getString(R.string.key_user_login_data), userMst);
+            setResult(RESULT_OK, data);
+        }
         finish();
     }
 
@@ -354,7 +357,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         mBinding.txtPassword.setErrorEnabled(false);
         mBinding.txtConfPassword.setErrorEnabled(false);
 
-        mBinding.txtUserId.setError("");
+       mBinding.txtUserId.setError("");
         mBinding.txtUserName.setError("");
         mBinding.txtPassword.setError("");
         mBinding.txtConfPassword.setError("");
