@@ -14,10 +14,12 @@ import com.meghalayaads.allads.common.response.UserTypeResponse;
 import com.meghalayaads.allads.common.services.CommonServices;
 import com.meghalayaads.allads.common.services.CommonServicesImpl;
 import com.meghalayaads.allads.common.util.AdsConstant;
+import com.meghalayaads.allads.common.util.CommonUtil;
 import com.meghalayaads.allads.common.util.Error;
 import com.meghalayaads.allads.user.activity.registration.ActivitySignUp;
 import com.meghalayaads.allads.user.events.OnSignUpEvent;
 import com.meghalayaads.allads.user.model.SignUpModel;
+import com.meghalayaads.allads.user.response.registration.StatusResponse;
 import com.meghalayaads.allads.user.response.registration.UserRegResponse;
 import com.meghalayaads.allads.user.service.registration.RegistrationService;
 import com.meghalayaads.allads.user.service.registration.RegistrationServiceImpl;
@@ -38,8 +40,6 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<UserType>> userTypesLiveData = new MutableLiveData<>();
     private MutableLiveData<SignUpModel> signUpLiveData=new MutableLiveData<>();
     private OnSignUpEvent event;
-    private MutableLiveData<String> otp = new MutableLiveData<>();
-    private MutableLiveData<String> count = new MutableLiveData<>();
 
     public ActivitySignUpViewModel(@NonNull Application application) {
         super(application);
@@ -100,8 +100,43 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<UserTypeResponse> call, Throwable t) {
                 Log.d(AdsConstant.TAG, "onFailure: " + t.getMessage());
+
             }
         });
+    }
+
+
+    public void isMobileNumberExist() {
+        RegistrationService service=RegistrationServiceImpl.getService();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("mob_no", signUpLiveData.getValue().getMobileNumber());
+       service.isMobileNumberExist(map).enqueue(new Callback<StatusResponse>() {
+           @Override
+           public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+               if(response.body().isStatus()){
+                   //exist
+                   ArrayList<Error> errors=new ArrayList<>();
+                   errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG001.toString(),application.getString(R.string.mobie_no_already_reg),"REG"));
+                   UserRegResponse regResponse=new UserRegResponse();
+                   event.onRegistrationFail(regResponse);
+
+               }else{
+                   //not exist
+                   registerUser();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<StatusResponse> call, Throwable t) {
+               ArrayList<Error> errors=new ArrayList<>();
+               errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG005.toString(),t.getMessage(),"REG"));
+               UserRegResponse regResponse=new UserRegResponse();
+               regResponse.setStatus(false);
+               regResponse.setErrors(errors);
+               event.onRegistrationSuccess(regResponse);
+           }
+       });
+
     }
 
 
@@ -110,10 +145,7 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
         ArrayList<Error> errors = new ArrayList<>();
 
         //validate mobile number
-        if (null == data.getMobileNumber() ||
-                TextUtils.isEmpty(data.getMobileNumber().trim()) ||
-                !TextUtils.isDigitsOnly(data.getMobileNumber().trim()) ||
-                data.getMobileNumber().trim().length() != 10) {
+        if (!CommonUtil.isValidMobNo(data.getMobileNumber())) {
             errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.ERR001.toString(),
                     application.getString(R.string.validate_mobile_number), "REG"));
         }
@@ -140,7 +172,7 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
         }
 
 
-        event.setErrorUI(errors);
+       event.setErrorUI(errors);
         return errors.size() == 0;
     }
 
@@ -175,21 +207,5 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
 
     public void setEvent(OnSignUpEvent event) {
         this.event = event;
-    }
-
-    public MutableLiveData<String> getOtp() {
-        return otp;
-    }
-
-    public void setOtp(MutableLiveData<String> otp) {
-        this.otp = otp;
-    }
-
-    public MutableLiveData<String> getCount() {
-        return count;
-    }
-
-    public void setCount(MutableLiveData<String> count) {
-        this.count = count;
     }
 }
