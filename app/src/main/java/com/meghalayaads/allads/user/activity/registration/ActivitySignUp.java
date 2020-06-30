@@ -82,10 +82,10 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
 
         mBinding.btnSignUp.setOnClickListener(view -> {
             if (model.validateUserData()) {
-
+                removeErrorUI();
                 ViewUtil.setVisibility(mBinding.rootCons, View.INVISIBLE);
                 mBinding.progressBar.setVisibility(View.VISIBLE);
-
+                mBinding.bottomSheetOTP.txtResend.setEnabled(false);
                 PhoneAuthProvider.getInstance()
                         .verifyPhoneNumber("+91" + model.getSignUpLiveData().getValue().getMobileNumber().trim().replace(" ", ""),
                                 60,
@@ -122,6 +122,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
                     mBinding.txtError.setError(getString(R.string.error_quota_exceeded));
+                    mBinding.txtError.setVisibility(View.VISIBLE);
                 } else {
                     mBinding.txtError.setError(e.getMessage());
                 }
@@ -131,13 +132,14 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
             @Override
             public void onCodeSent(@NonNull String id, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(id, forceResendingToken);
+                removeErrorUI();
                 countDownTimer.start();
                 sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 mBinding.bottomSheetOTP.txtResendCountDown.setText("");
 
                 ViewUtil.setVisibility(mBinding.rootCons, View.VISIBLE);
                 mBinding.progressBar.setVisibility(View.GONE);
-
+                mBinding.bottomSheetOTP.txtResend.setEnabled(false);
                 mVerificationId = id;
                 mResendToken = forceResendingToken;
             }
@@ -161,7 +163,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
             public void onTick(long millisUntilFinished) {
                 //model.getCount().setValue(String.valueOf();
                 mBinding.bottomSheetOTP.txtResendCountDown.setText(String.valueOf(millisUntilFinished / 1000) + ":00");
-                //here you can have your logic to set text to edittext
+                //here you can have your logic to set text to edit text
             }
 
             public void onFinish() {
@@ -173,12 +175,22 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         };
 
         mBinding.bottomSheetOTP.btnConfirm.setOnClickListener(v -> {
-            mBinding.bottomSheetOTP.txtOtp.setError("");
-            mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(false);
-            signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(
-                    mVerificationId,
-                    mBinding.bottomSheetOTP.txtOtp.toString().trim()));
-        });
+                    mBinding.bottomSheetOTP.txtOtp.setError("");
+                    mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(false);
+                    if(mBinding.bottomSheetOTP.txtOtp.getEditText().getText() != null &&
+                            !TextUtils.isEmpty(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())
+                            && !TextUtils.isDigitsOnly(mBinding.bottomSheetOTP.txtOtp.getEditText().getText())) {
+                        signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(
+                                mVerificationId,
+                                mBinding.bottomSheetOTP.txtOtp.toString().trim()));
+                    } else {
+                        mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(true);
+                        mBinding.bottomSheetOTP.txtOtp.setError(getString(R.string.opt_wrong));
+                    }
+                }
+
+
+        );
 
 
         mBinding.bottomSheetOTP.txtResend.setOnClickListener(view -> {
@@ -214,13 +226,15 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                                 sheetBehavior.getState() == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                             sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         }
-                        ViewUtil.setVisibility(mBinding.rootCons, View.VISIBLE);
-                        mBinding.progressBar.setVisibility(View.INVISIBLE);
+                        ViewUtil.setVisibility(mBinding.rootCons, View.GONE);
+                        mBinding.progressBar.setVisibility(View.VISIBLE);
                         model.registerUser();
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             mBinding.bottomSheetOTP.txtOtp.setErrorEnabled(true);
                             mBinding.bottomSheetOTP.txtOtp.setError(getString(R.string.opt_wrong));
+                            ViewUtil.setVisibility(mBinding.rootCons, View.VISIBLE);
+                            mBinding.progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -267,10 +281,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
 
             }
         } else {
-            mBinding.txtUserId.setErrorEnabled(false);
-            mBinding.txtUserName.setErrorEnabled(false);
-            mBinding.txtPassword.setErrorEnabled(false);
-            mBinding.txtConfPassword.setErrorEnabled(false);
+            removeErrorUI();
         }
     }
 
@@ -280,8 +291,6 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         if (response.isStatus() && response.getUser() != null) {
             backToLogin(response.getUser());
         }
-
-
     }
 
     @Override
@@ -318,6 +327,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
 
             if (!TextUtils.isEmpty(buffer)) {
                 mBinding.txtError.setText(buffer);
+                mBinding.txtError.setVisibility(View.VISIBLE);
             }
 
         }
@@ -342,7 +352,14 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         mBinding.txtUserName.setErrorEnabled(false);
         mBinding.txtPassword.setErrorEnabled(false);
         mBinding.txtConfPassword.setErrorEnabled(false);
+
+        mBinding.txtUserId.setError("");
+        mBinding.txtUserName.setError("");
+        mBinding.txtPassword.setError("");
+        mBinding.txtConfPassword.setError("");
+
         mBinding.txtError.setText("");
+        mBinding.txtError.setVisibility(View.GONE);
     }
 
 }
