@@ -40,4 +40,7 @@
     <string name="key_user_login_data">key_user_login_data</string>
     <string name="mobie_no_already_reg">mobile already register with allads</string>
     <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="is_from_sign_up">is_from_sign_up</string>
+    <string name="key_moible_no">key_moible_no</string>
+    <string name="key_errors">key_errors</string>
 </resources>

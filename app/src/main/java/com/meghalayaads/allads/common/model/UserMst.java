@@ -37,6 +37,9 @@ public class UserMst implements Parcelable {
     @SerializedName("device_id")
     private String deviceId;
 
+    @SerializedName("is_mob_verify")
+    private boolean isMobVerify;
+
     @SerializedName("created_date")
     private Date createdDate;
 
@@ -44,7 +47,7 @@ public class UserMst implements Parcelable {
     private String updateDate;
 
 
-    public UserMst(int uid, String mobileNum, String userName, String passwordHash, int addressId, int userTypeId, String email, String deviceId, Date createdDate, String updateDate) {
+    public UserMst(int uid, String mobileNum, String userName, String passwordHash, int addressId, int userTypeId, String email, String deviceId, boolean isMobVerify, Date createdDate, String updateDate) {
         this.uid = uid;
         this.mobileNum = mobileNum;
         this.userName = userName;
@@ -53,12 +56,14 @@ public class UserMst implements Parcelable {
         this.userTypeId = userTypeId;
         this.email = email;
         this.deviceId = deviceId;
+        this.isMobVerify = isMobVerify;
         this.createdDate = createdDate;
         this.updateDate = updateDate;
     }
 
     public UserMst() {
     }
+
 
     protected UserMst(Parcel in) {
         uid = in.readInt();
@@ -69,6 +74,7 @@ public class UserMst implements Parcelable {
         userTypeId = in.readInt();
         email = in.readString();
         deviceId = in.readString();
+        isMobVerify = in.readByte() != 0;
         updateDate = in.readString();
     }
 
@@ -82,6 +88,7 @@ public class UserMst implements Parcelable {
         dest.writeInt(userTypeId);
         dest.writeString(email);
         dest.writeString(deviceId);
+        dest.writeByte((byte) (isMobVerify ? 1 : 0));
         dest.writeString(updateDate);
     }
 
@@ -180,5 +187,13 @@ public class UserMst implements Parcelable {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public boolean isMobVerify() {
+        return isMobVerify;
+    }
+
+    public void setMobVerify(boolean mobVerify) {
+        isMobVerify = mobVerify;
     }
 }

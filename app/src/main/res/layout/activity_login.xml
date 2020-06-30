@@ -65,7 +65,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -73,12 +73,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtUserId"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                style="@style/LoginTextInputLayoutStyle"
                 app:counterMaxLength="10"
 
                 app:layout_constraintBottom_toTopOf="@+id/txtPassword"
@@ -91,19 +91,19 @@
                     android:fontFamily="@font/popin"
                     android:hint="@string/user_mobile_number"
                     android:inputType="phone"
-                    android:text="@={model.loginModelData.userId}"
                     android:maxLines="1"
+                    android:text="@={model.loginModelData.userId}"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtPassword"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                style="@style/LoginTextInputLayoutStyle"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/btnSignIn"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,8 +115,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/popin"
                     android:hint="@string/password"
-                    android:text="@={model.loginModelData.password}"
                     android:inputType="textPassword"
+                    android:text="@={model.loginModelData.password}"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,27 +139,31 @@
 
             <Button
                 android:id="@+id/btnSignIn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_hight"
                 android:layout_margin="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/popin"
                 android:text="@string/sign_in"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
+                style="@style/AppTheme.RoundedCornerMaterialButtonColored"
                 app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btnSignUp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_hight"
                 android:layout_margin="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/popin"
                 android:text="@string/sign_up"
+                android:textColor="@color/colorAccent"
+                style="@style/AppTheme.RoundedCornerMaterialBordered"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +181,6 @@
                 android:gravity="center"
                 android:text="@string/all_ads_comp_name"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="parent"

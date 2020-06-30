@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -175,11 +174,12 @@
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/sign_button_hight"
+                android:layout_height="@dimen/button_hight"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/round_shape"
+                style="@style/AppTheme.RoundedCornerMaterialButtonColored"
                 android:fontFamily="@font/popin"
                 android:textAllCaps="false"
                 android:text="@string/sign_up"
@@ -206,12 +206,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
-        <include
-            android:id="@+id/bottomSheetOTP"
-            bind:model="@={model}"
-            layout="@layout/buttom_sheet_otp_verification"
-            android:visibility="visible" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
