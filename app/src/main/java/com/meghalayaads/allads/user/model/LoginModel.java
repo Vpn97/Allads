@@ -16,14 +16,19 @@ import com.meghalayaads.allads.BR;
 public class LoginModel  extends BaseObservable implements Parcelable {
 
     @SerializedName("user_id")
-    private String userId;
+    private String mobNo;
 
     @SerializedName("password")
     private String password;
 
-    public LoginModel(String userId, String password) {
-        this.userId = userId;
+    @SerializedName("device_id")
+    private String deviceId;
+
+
+    public LoginModel(String mobNo, String password, String deviceId) {
+        this.mobNo = mobNo;
         this.password = password;
+        this.deviceId = deviceId;
     }
 
 
@@ -31,14 +36,16 @@ public class LoginModel  extends BaseObservable implements Parcelable {
     }
 
     protected LoginModel(Parcel in) {
-        userId = in.readString();
+        mobNo = in.readString();
         password = in.readString();
+        deviceId = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(userId);
+        dest.writeString(mobNo);
         dest.writeString(password);
+        dest.writeString(deviceId);
     }
 
     @Override
@@ -59,13 +66,13 @@ public class LoginModel  extends BaseObservable implements Parcelable {
     };
 
     @Bindable
-    public String getUserId() {
-        return userId;
+    public String getMobNo() {
+        return mobNo;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-        notifyPropertyChanged(BR.userId);
+    public void setMobNo(String mobNo) {
+        this.mobNo = mobNo;
+        notifyPropertyChanged(BR.mobNo);
 
     }
 
@@ -77,5 +84,15 @@ public class LoginModel  extends BaseObservable implements Parcelable {
     public void setPassword(String password) {
         this.password = password;
         notifyPropertyChanged(BR.password);
+    }
+
+    @Bindable
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+        notifyPropertyChanged(BR.deviceId);
     }
 }

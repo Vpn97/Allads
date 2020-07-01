@@ -43,4 +43,10 @@
     <string name="is_from_sign_up">is_from_sign_up</string>
     <string name="key_moible_no">key_moible_no</string>
     <string name="key_errors">key_errors</string>
+    <string name="invalid_password">Invalid user id and password</string>
+    <string name="mobile_not_reg_sign_up_now">Mobile number is not register, SIGN UP !</string>
+    <string name="invalid_req">Invalid request</string>
+    <string name="is_from_login">is_from_login</string>
+    <string name="key_user_mst">key_user_mst</string>
+    <string name="key_user_data">key_user_data</string>
 </resources>

@@ -19,6 +19,7 @@ public class CommonRestURL {
     public static final String REG_USER_MST="registration/regUserMst.php";
     public static final String IS_MOB_NO_EXIST="registration/isMobileNumExist.php";
     public static final String SET_MOB_NO_VERIFY="registration/setIsMobileVerify.php";
+    public static final String LOGIN_REQ="registration/loginreq.php";
 
 
 }

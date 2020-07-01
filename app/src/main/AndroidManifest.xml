@@ -12,8 +12,11 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".user.activity.registration.ActivityVerifyOTP"
+        <activity android:name=".user.activity.registration.ActivityUpdatePassword"
             android:theme="@style/Theme.App.NoActionBar"/>
+        <activity
+            android:name=".user.activity.registration.ActivityVerifyOTP"
+            android:theme="@style/Theme.App.NoActionBar" />
         <activity
             android:name=".user.activity.registration.ActivitySignUp"
             android:theme="@style/Theme.App.NoActionBar" />

@@ -27,4 +27,8 @@ public interface RegistrationService {
     @POST(CommonRestURL.SET_MOB_NO_VERIFY)
     Call<StatusResponse> setIsMobileVerify(@QueryMap HashMap<String,String> mQueryMap);
 
+
+    @POST(CommonRestURL.LOGIN_REQ)
+    Call<UserRegResponse> loginRequest(@QueryMap HashMap<String,String> mQueryMap);
+
 }
