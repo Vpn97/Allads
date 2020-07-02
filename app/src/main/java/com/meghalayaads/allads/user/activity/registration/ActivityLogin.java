@@ -238,6 +238,8 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
                         mBinding.txtPassword.setErrorEnabled(true);
                         mBinding.txtPassword.setError(getString(R.string.invalid_req));
                         break;
+
+                    case 6:
                     default:
                         mBinding.txtPassword.setErrorEnabled(true);
                         mBinding.txtPassword.setError(error.getMessage());
@@ -301,7 +303,8 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
         //from server
         LOGIN003, // mobile not register with allads
         LOGIN004, // invalid user id and password
-        LOGIN005 //invalid req
+        LOGIN005,//invalid req
+        LOGIN006 //not able to connect server req
 
     }
 

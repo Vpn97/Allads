@@ -47,6 +47,7 @@ public class ActivityLoginViewModel extends AndroidViewModel {
     public void loginRequest(){
 
         if(validateUserData()) {
+            event.onLoginStart();
             RegistrationService service = RegistrationServiceImpl.getService();
             HashMap<String, String> map = new HashMap<>();
             map.put("mob_no", loginModelData.getValue().getMobNo());
@@ -67,7 +68,7 @@ public class ActivityLoginViewModel extends AndroidViewModel {
                 @Override
                 public void onFailure(Call<UserRegResponse> call, Throwable t) {
                     ArrayList<Error> errors=new ArrayList<>();
-                    errors.add(new Error(ActivityLogin.LOGIN_ERROR_CODE.LOGIN005.toString(),t.getMessage(),"REG"));
+                    errors.add(new Error(ActivityLogin.LOGIN_ERROR_CODE.LOGIN006.toString(),t.getMessage(),"REG"));
                     UserRegResponse regResponse=new UserRegResponse();
                     regResponse.setStatus(false);
                     regResponse.setErrors(errors);

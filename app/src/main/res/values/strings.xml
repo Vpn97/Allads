@@ -59,4 +59,8 @@
     <string name="is_from_forget_password">is_from_forget_password</string>
     <string name="forgot_password_msg">Enter your phone number below to\nreceive your password reset instruction</string>
     <string name="password_updated">Password updated successfully</string>
+    <string name="title_activity_admin_dashboard">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
