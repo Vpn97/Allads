@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_navigation"
+    app:startDestination="@+id/nav_report">
+
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="com.meghalayaads.allads.admin.activity.ui.dashboard.AdsReportFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_ads_report_fragment" />
+
+    <fragment
+        android:id="@+id/nav_all_ads"
+        android:name="com.meghalayaads.allads.admin.activity.ui.home.AllAdsFragment"
+        android:label="@string/title_ads"
+        tools:layout="@layout/fragment_all_ads" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.meghalayaads.allads.admin.activity.ui.notifications.SettingFragment"
+        android:label="@string/title_setting"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

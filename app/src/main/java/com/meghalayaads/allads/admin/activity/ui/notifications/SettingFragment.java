@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.meghalayaads.allads.R;
 
-public class NotificationsFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private SettingFragmentViewModel settingFragmentViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        settingFragmentViewModel =
+                new ViewModelProvider(this).get(SettingFragmentViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_settings, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        settingFragmentViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

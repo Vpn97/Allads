@@ -64,4 +64,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="key_is_from_admin_login">key_is_from_admin_login</string>
+    <string name="key_admin_mst">key_admin_mst</string>
+    <string name="title_ads">All Ads</string>
+    <string name="title_set_up">Set up</string>
+    <string name="title_setting">Setting</string>
 </resources>

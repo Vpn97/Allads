@@ -14,7 +14,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".admin.activity.AdminDashboard"
-            android:label="@string/title_activity_admin_dashboard"></activity>
+            android:theme="@style/Theme.App"/>
         <activity
             android:name=".user.activity.registration.ActivityUpdatePassword"
             android:theme="@style/Theme.App.NoActionBar" />

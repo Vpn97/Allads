@@ -93,21 +93,25 @@ public class ActivityLoginViewModel extends AndroidViewModel {
 
                 RegistrationService service=RegistrationServiceImpl.getService();
                 HashMap<String, String> map = new HashMap<>();
-                map.put("mob_no", loginModelData.getValue().getMobNo());
+                map.put("mob_no", mobNo);
                 map.put("push_data", pushData);
                 service.adminLoginReq(map).enqueue(new Callback<AdminLoginResponse>() {
                     @Override
                     public void onResponse(Call<AdminLoginResponse> call, Response<AdminLoginResponse> response) {
-
+                        if(response.body()!=null && response.body().isStatus()){
+                            event.onAdminLoginSuccess(response.body(),mobNo);
+                        }else{
+                            event.onAdminLoginFail(response.body());
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<AdminLoginResponse> call, Throwable t) {
-
+                        ArrayList<Error> errors=new ArrayList<>();
+                        errors.add(new Error(ActivityLogin.LOGIN_ERROR_CODE.ADMIN004.toString(),
+                                t.getMessage(), "REG"));
                     }
                 });
-
-
 
             }else{
                 ArrayList<Error> errors=new ArrayList<>();

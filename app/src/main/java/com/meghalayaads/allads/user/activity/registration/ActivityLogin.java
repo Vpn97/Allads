@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.meghalayaads.allads.R;
+import com.meghalayaads.allads.admin.activity.AdminDashboard;
 import com.meghalayaads.allads.admin.model.AdminMst;
 import com.meghalayaads.allads.admin.response.AdminLoginResponse;
 import com.meghalayaads.allads.common.model.UserMst;
@@ -47,6 +48,7 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
     private ActivityLoginBinding mBinding;
     private ActivityLoginViewModel model;
     private UserMst userMst;
+    private AdminMst admin;
     private DataStorage storage;
     private DialoadForgetPasswordBinding forgetPasswordBinding;
     private BottomSheetDialog dialog;
@@ -68,7 +70,15 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
 
         //get login
         userMst=new Gson().fromJson((String.valueOf(storage.read(getString(R.string.key_user_mst),DataStorage.STRING))),UserMst.class);
-        loginNow(userMst);
+        admin=new Gson().fromJson((String.valueOf(storage.read(getString(R.string.key_admin_mst),DataStorage.STRING))),AdminMst.class);
+
+        if(userMst!=null) {
+            loginNow(userMst);
+        }
+
+        if(admin!=null){
+            goToAdminDashboard(admin);
+        }
 
         //get device id
         FirebaseInstanceId.getInstance().getInstanceId()
@@ -188,17 +198,7 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
 
     }
 
-    private void loginNow(UserMst mst) {
-        if(mst!=null){
-            Toast.makeText(this, mst.getMobileNum()+" : login Successfully", Toast.LENGTH_SHORT).show();
 
-            storage.write(getString(R.string.key_user_mst),new Gson().toJson(mst));
-            Intent intent=new Intent(this, Dashboard.class);
-            intent.putExtra(getString(R.string.key_user_mst),mst);
-            startActivity(intent);
-            finish();
-        }
-    }
 
     @Override
     public void onLoginStart() {
@@ -336,9 +336,6 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
     }
 
 
-    private void goToAdminDashboard(AdminMst adminMst) {
-        //TODO goto admin dashboard intent
-    }
 
 
     public void showForgotPasswordWindow(){
@@ -366,6 +363,29 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
     }
 
 
+    private void loginNow(UserMst mst) {
+        if(mst!=null){
+            Toast.makeText(this, mst.getMobileNum()+" : login Successfully", Toast.LENGTH_SHORT).show();
+
+            storage.write(getString(R.string.key_user_mst),new Gson().toJson(mst));
+            Intent intent=new Intent(this, Dashboard.class);
+            intent.putExtra(getString(R.string.key_user_mst),mst);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
+    private void goToAdminDashboard(AdminMst adminMst) {
+        storage.write(getString(R.string.key_admin_mst),new Gson().toJson(adminMst));
+        Intent intent=new Intent(this, AdminDashboard.class);
+        intent.putExtra(getString(R.string.key_admin_mst),adminMst);
+        startActivity(intent);
+        finish();
+    }
+
+
+
 
     public enum LOGIN_ERROR_CODE {
         LOGIN001, //valid mob no
@@ -381,6 +401,7 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
         ADMIN001, //mob_no cannot be empty
         ADMIN002,///push_data
         ADMIN003, //Admin not register with allads
+        ADMIN004 //server not connected
     }
 
     public void startProgressbar() {
