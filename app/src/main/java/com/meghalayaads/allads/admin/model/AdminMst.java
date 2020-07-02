@@ -3,6 +3,8 @@ package com.meghalayaads.allads.admin.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -11,35 +13,50 @@ import java.util.Date;
  */
 public class AdminMst implements Parcelable {
 
-    private String adminId;
-    private String uid;
+    @SerializedName("admin_id")
+    private int adminId;
+
+    @SerializedName("mob_no")
+    private String mobNo;
+
+    @SerializedName("uid")
+    private int uid;
+
+    @SerializedName("can_edit_prices")
     private boolean canEditPrices;
+
+    @SerializedName("created_date")
     private Date createdDate;
+
+    @SerializedName("can_post_ads")
     private boolean canPostAds;
 
-    public AdminMst(String adminId, String uid, boolean canEditPrices, Date createdDate, boolean canPostAds) {
+
+    public AdminMst(int adminId, String mobNo, int uid, boolean canEditPrices, Date createdDate, boolean canPostAds) {
         this.adminId = adminId;
+        this.mobNo = mobNo;
         this.uid = uid;
         this.canEditPrices = canEditPrices;
         this.createdDate = createdDate;
         this.canPostAds = canPostAds;
     }
 
-
     public AdminMst() {
     }
 
     protected AdminMst(Parcel in) {
-        adminId = in.readString();
-        uid = in.readString();
+        adminId = in.readInt();
+        mobNo = in.readString();
+        uid = in.readInt();
         canEditPrices = in.readByte() != 0;
         canPostAds = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(adminId);
-        dest.writeString(uid);
+        dest.writeInt(adminId);
+        dest.writeString(mobNo);
+        dest.writeInt(uid);
         dest.writeByte((byte) (canEditPrices ? 1 : 0));
         dest.writeByte((byte) (canPostAds ? 1 : 0));
     }
@@ -61,19 +78,27 @@ public class AdminMst implements Parcelable {
         }
     };
 
-    public String getAdminId() {
+    public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
 
-    public String getUid() {
+    public String getMobNo() {
+        return mobNo;
+    }
+
+    public void setMobNo(String mobNo) {
+        this.mobNo = mobNo;
+    }
+
+    public int getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 

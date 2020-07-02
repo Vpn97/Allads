@@ -46,6 +46,11 @@ public class ActivityLoginViewModel extends AndroidViewModel {
 
     public void loginRequest(){
 
+        if(null!= loginModelData.getValue().getMobNo() && loginModelData.getValue().getMobNo().startsWith("A")){
+            adminLoginReq();
+            return;
+        }
+
         if(validateUserData()) {
             event.onLoginStart();
             RegistrationService service = RegistrationServiceImpl.getService();
@@ -76,6 +81,13 @@ public class ActivityLoginViewModel extends AndroidViewModel {
                 }
             });
         }
+    }
+
+
+
+    public void adminLoginReq(){
+
+
     }
 
 
