@@ -31,4 +31,7 @@ public interface RegistrationService {
     @POST(CommonRestURL.LOGIN_REQ)
     Call<UserRegResponse> loginRequest(@QueryMap HashMap<String,String> mQueryMap);
 
+    @POST(CommonRestURL.UPDATE_PASSWORD)
+    Call<StatusResponse> updatePassword(@QueryMap HashMap<String,String> mQueryMap);
+
 }

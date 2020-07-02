@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.meghalayaads.allads.common.util.Error;
+
+import java.util.ArrayList;
 
 /**
  * Allads
@@ -14,8 +17,12 @@ public class StatusResponse  implements Parcelable {
     @SerializedName("status")
     private boolean status;
 
-    public StatusResponse(boolean status) {
+    @SerializedName("errors")
+    private ArrayList<Error> errors;
+
+    public StatusResponse(boolean status, ArrayList<Error> errors) {
         this.status = status;
+        this.errors = errors;
     }
 
     public StatusResponse() {
@@ -23,11 +30,13 @@ public class StatusResponse  implements Parcelable {
 
     protected StatusResponse(Parcel in) {
         status = in.readByte() != 0;
+        errors = in.createTypedArrayList(Error.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte((byte) (status ? 1 : 0));
+        dest.writeTypedList(errors);
     }
 
     @Override
@@ -53,5 +62,13 @@ public class StatusResponse  implements Parcelable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public ArrayList<Error> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(ArrayList<Error> errors) {
+        this.errors = errors;
     }
 }

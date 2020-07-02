@@ -116,7 +116,7 @@ public class ActivitySignUpViewModel extends AndroidViewModel {
                if(response.body().isStatus()){
                    //exist
                    ArrayList<Error> errors=new ArrayList<>();
-                   errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG001.toString(),application.getString(R.string.mobie_no_already_reg),"REG"));
+                   errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG001.toString(),application.getString(R.string.mobile_no_already_reg),"REG"));
                    UserRegResponse regResponse=new UserRegResponse();
                    event.onRegistrationFail(regResponse);
 

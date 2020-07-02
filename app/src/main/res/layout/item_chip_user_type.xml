@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:fontFamily="@font/popin"
     android:gravity="center"
-    android:text="@string/catagory"
+    android:text="@string/category"
     android:textAppearance="?android:attr/textAppearance"
     app:chipCornerRadius="16dp"
     app:chipStrokeColor="@color/colorAccent"

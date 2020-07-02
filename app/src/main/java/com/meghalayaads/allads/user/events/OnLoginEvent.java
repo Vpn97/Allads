@@ -16,4 +16,5 @@ public interface OnLoginEvent {
     public void onLoginFail(UserRegResponse response);
 
     public void setErrorUI(ArrayList<Error> errors);
+    public void setForgetPasswordUIError(ArrayList<Error> errors,String mobNo);
 }

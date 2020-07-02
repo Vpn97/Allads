@@ -54,7 +54,7 @@ public class ActivityVerifyOTP extends AppCompatActivity implements OnVerifyOTPE
         Intent intent = getIntent();
         if (null != intent) {
             isFromSignUp = intent.getBooleanExtra(getString(R.string.is_from_sign_up), false);
-            mobileNumber = intent.getStringExtra(getString(R.string.key_moible_no));
+            mobileNumber = intent.getStringExtra(getString(R.string.key_mobile_no));
         }
 
         if (mobileNumber == null) {
@@ -211,7 +211,7 @@ public class ActivityVerifyOTP extends AppCompatActivity implements OnVerifyOTPE
             intent.putExtra(getString(R.string.key_errors), errors);
         } else {
             //otp verify successfully
-            intent.putExtra(getString(R.string.key_moible_no), mobileNumber);
+            intent.putExtra(getString(R.string.key_mobile_no), mobileNumber);
         }
         setResult(RESULT_OK, intent);
         finish();

@@ -124,7 +124,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         if (response.isStatus() && response.getUser() != null) {
            // backToLogin(response.getUser());
             Intent intent=new Intent(this,ActivityVerifyOTP.class);
-            intent.putExtra(getString(R.string.key_moible_no),response.getUser().getMobileNum());
+            intent.putExtra(getString(R.string.key_mobile_no),response.getUser().getMobileNum());
             intent.putExtra(getString(R.string.is_from_sign_up),true);
             startActivityForResult(intent,REQ_VERIFY_OTP);
         }
@@ -138,9 +138,9 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
         removeErrorUI();
         if(requestCode==REQ_VERIFY_OTP && resultCode==RESULT_OK){
             if(null!=data &&
-            data.getStringExtra(getString(R.string.key_moible_no))!=null){
+            data.getStringExtra(getString(R.string.key_mobile_no))!=null){
                 UserMst mst=new UserMst();
-                mst.setMobileNum(data.getStringExtra(getString(R.string.key_moible_no)));
+                mst.setMobileNum(data.getStringExtra(getString(R.string.key_mobile_no)));
                 backToLogin(mst);
             }else if(null!=data &&
                     data.getParcelableArrayListExtra(getString(R.string.key_errors))!=null &&
@@ -189,7 +189,7 @@ public class ActivitySignUp extends AppCompatActivity implements OnSignUpEvent {
                 switch (e.toIntValue()) {
                     case 1:
                         //REG001, mobile already exist
-                        mBinding.txtUserId.setError(getString(R.string.mobie_no_already_reg));
+                        mBinding.txtUserId.setError(getString(R.string.mobile_no_already_reg));
                         break;
                     case 2:
                         mBinding.txtUserId.setError(getString(R.string.enter_mobile_number));

@@ -11,8 +11,10 @@ import com.meghalayaads.allads.R;
 import com.meghalayaads.allads.common.util.CommonUtil;
 import com.meghalayaads.allads.common.util.Error;
 import com.meghalayaads.allads.user.activity.registration.ActivityLogin;
+import com.meghalayaads.allads.user.activity.registration.ActivitySignUp;
 import com.meghalayaads.allads.user.events.OnLoginEvent;
 import com.meghalayaads.allads.user.model.LoginModel;
+import com.meghalayaads.allads.user.response.registration.StatusResponse;
 import com.meghalayaads.allads.user.response.registration.UserRegResponse;
 import com.meghalayaads.allads.user.service.registration.RegistrationService;
 import com.meghalayaads.allads.user.service.registration.RegistrationServiceImpl;
@@ -74,6 +76,43 @@ public class ActivityLoginViewModel extends AndroidViewModel {
             });
         }
     }
+
+
+
+
+    public void isMobileNumberExist(String mobNo) {
+        RegistrationService service=RegistrationServiceImpl.getService();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("mob_no", mobNo);
+        service.isMobileNumberExist(map).enqueue(new Callback<StatusResponse>() {
+            @Override
+            public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
+                if(response.body().isStatus()){
+                    //exist
+                    event.setForgetPasswordUIError(null,mobNo);
+                }else{
+                    //not exist
+                    ArrayList<Error> errors=new ArrayList<>();
+                    errors.add(new Error(ActivityLogin.LOGIN_ERROR_CODE.LOGIN003.toString(),application.getString(R.string.mobile_not_reg_sign_up_now),"REG"));
+                    UserRegResponse regResponse=new UserRegResponse();
+                    regResponse.setErrors(errors);
+                    event.setForgetPasswordUIError(regResponse.getErrors(),mobNo);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StatusResponse> call, Throwable t) {
+                ArrayList<Error> errors=new ArrayList<>();
+                errors.add(new Error(ActivitySignUp.SING_UP_ERROR_CODE.REG005.toString(),t.getMessage(),"REG"));
+                UserRegResponse regResponse=new UserRegResponse();
+                regResponse.setStatus(false);
+                regResponse.setErrors(errors);
+                event.setForgetPasswordUIError(regResponse.getErrors(),mobNo);
+            }
+        });
+
+    }
+
 
 
     public boolean validateUserData() {

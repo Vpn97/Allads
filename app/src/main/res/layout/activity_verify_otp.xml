@@ -42,7 +42,7 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/font"
                 android:gravity="center|end"
-                android:text="@{@string/varificatiion_sub_msg + mobileNumber}"
+                android:text="@{@string/verification_sub_msg + mobileNumber}"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textSize="12sp"
