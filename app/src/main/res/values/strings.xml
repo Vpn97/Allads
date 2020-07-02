@@ -63,4 +63,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="key_is_from_admin_login">key_is_from_admin_login</string>
 </resources>

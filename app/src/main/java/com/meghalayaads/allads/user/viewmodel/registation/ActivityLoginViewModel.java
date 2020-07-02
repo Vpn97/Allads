@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.meghalayaads.allads.R;
+import com.meghalayaads.allads.admin.response.AdminLoginResponse;
 import com.meghalayaads.allads.common.util.CommonUtil;
 import com.meghalayaads.allads.common.util.Error;
 import com.meghalayaads.allads.user.activity.registration.ActivityLogin;
@@ -46,8 +47,8 @@ public class ActivityLoginViewModel extends AndroidViewModel {
 
     public void loginRequest(){
 
-        if(null!= loginModelData.getValue().getMobNo() && loginModelData.getValue().getMobNo().startsWith("A")){
-            adminLoginReq();
+        if(null!= loginModelData.getValue().getMobNo() && loginModelData.getValue().getMobNo().startsWith("#")){
+            adminLoginReq("N");
             return;
         }
 
@@ -85,9 +86,35 @@ public class ActivityLoginViewModel extends AndroidViewModel {
 
 
 
-    public void adminLoginReq(){
+    public void adminLoginReq(String pushData){
+
+            String mobNo=loginModelData.getValue().getMobNo().trim().substring(1);
+            if(CommonUtil.isValidMobNo(mobNo)){
+
+                RegistrationService service=RegistrationServiceImpl.getService();
+                HashMap<String, String> map = new HashMap<>();
+                map.put("mob_no", loginModelData.getValue().getMobNo());
+                map.put("push_data", pushData);
+                service.adminLoginReq(map).enqueue(new Callback<AdminLoginResponse>() {
+                    @Override
+                    public void onResponse(Call<AdminLoginResponse> call, Response<AdminLoginResponse> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<AdminLoginResponse> call, Throwable t) {
+
+                    }
+                });
 
 
+
+            }else{
+                ArrayList<Error> errors=new ArrayList<>();
+                errors.add(new Error(ActivityLogin.LOGIN_ERROR_CODE.LOGIN001.toString(),
+                        application.getString(R.string.validate_mobile_number), "REG"));
+                event.setErrorUI(errors);
+            }
     }
 
 

@@ -21,6 +21,7 @@ public class CommonRestURL {
     public static final String SET_MOB_NO_VERIFY="registration/setIsMobileVerify.php";
     public static final String LOGIN_REQ="registration/loginreq.php";
     public static final String UPDATE_PASSWORD="registration/updateUserPassword.php";
+    public static final String ADMIN_LOGIN_REQ="registration/adminLoginReq.php";
 
 
 }

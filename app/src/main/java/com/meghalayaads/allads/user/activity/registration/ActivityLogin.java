@@ -17,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.meghalayaads.allads.R;
+import com.meghalayaads.allads.admin.model.AdminMst;
+import com.meghalayaads.allads.admin.response.AdminLoginResponse;
 import com.meghalayaads.allads.common.model.UserMst;
 import com.meghalayaads.allads.common.util.AdsConstant;
 import com.meghalayaads.allads.common.util.CommonUtil;
@@ -40,6 +42,7 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
     private static final int REQ_VERIFY_OTP = 12;
     private static final int REQ_VERIFY_OTP_FORGET_PASSWORD = 15;
     private static final int REQ_UPDATE_PASSWORD = 16;
+    private static final int REQ_VERIFY_OTP_ADMIN_LOGIN = 18;
 
     private ActivityLoginBinding mBinding;
     private ActivityLoginViewModel model;
@@ -162,6 +165,25 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
                 }
             }
 
+
+            //admin login verfy otp
+            if(requestCode==REQ_VERIFY_OTP_ADMIN_LOGIN){
+                if(null!=data &&
+                        data.getStringExtra(getString(R.string.key_mobile_no))!=null){
+                   //verifyed
+                    String mobNo=data.getStringExtra(getString(R.string.key_mobile_no));
+                    model.adminLoginReq("Y");
+                }else if(null!=data &&
+                        data.getParcelableArrayListExtra(getString(R.string.key_errors))!=null &&
+                        !data.getParcelableArrayListExtra(getString(R.string.key_errors)).isEmpty()){
+
+                    AdminLoginResponse loginResponse=new AdminLoginResponse();
+                    loginResponse.setErrors(data.getParcelableArrayListExtra(getString(R.string.key_errors)));
+                    onAdminLoginFail(loginResponse);
+                    mBinding.txtUserId.requestFocus();
+                }
+            }
+
         }
 
     }
@@ -269,6 +291,55 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
         }
     }
 
+    @Override
+    public void onAdminLoginStart() {
+        stopProgressbar();
+    }
+
+    @Override
+    public void onAdminLoginSuccess(AdminLoginResponse response,String mobNo) {
+        stopProgressbar();
+        if(response.isStatus() && response.getAdminMst() !=null){
+            // got to dashboard
+            goToAdminDashboard(response.getAdminMst());
+        }else{
+            //request for OTP verify
+            if(null!=mobNo) {
+                Intent intent = new Intent(this, ActivityVerifyOTP.class);
+                intent.putExtra(getString(R.string.key_mobile_no), mobNo.trim());
+                intent.putExtra(getString(R.string.key_is_from_admin_login), true);
+                startActivityForResult(intent, REQ_VERIFY_OTP_ADMIN_LOGIN);
+            }
+
+        }
+    }
+
+
+
+    @Override
+    public void onAdminLoginFail(AdminLoginResponse response) {
+        stopProgressbar();
+        if(response!=null && response.getErrors()!=null && !response.getErrors().isEmpty()){
+            removeErrorUI();
+            for(Error error:response.getErrors()){
+                switch (error.toIntValue()){
+
+                    default:
+                        mBinding.txtUserId.setErrorEnabled(true);
+                        mBinding.txtUserId.setError(error.getMessage());
+                        break;
+                }
+            }
+
+        }
+
+    }
+
+
+    private void goToAdminDashboard(AdminMst adminMst) {
+        //TODO goto admin dashboard intent
+    }
+
 
     public void showForgotPasswordWindow(){
         LayoutInflater inflater = getLayoutInflater();
@@ -304,8 +375,12 @@ public class ActivityLogin extends AppCompatActivity  implements OnLoginEvent {
         LOGIN003, // mobile not register with allads
         LOGIN004, // invalid user id and password
         LOGIN005,//invalid req
-        LOGIN006 //not able to connect server req
+        LOGIN006, //not able to connect server req
 
+
+        ADMIN001, //mob_no cannot be empty
+        ADMIN002,///push_data
+        ADMIN003, //Admin not register with allads
     }
 
     public void startProgressbar() {

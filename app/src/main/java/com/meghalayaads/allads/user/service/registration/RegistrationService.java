@@ -1,5 +1,6 @@
 package com.meghalayaads.allads.user.service.registration;
 
+import com.meghalayaads.allads.admin.response.AdminLoginResponse;
 import com.meghalayaads.allads.common.util.CommonRestURL;
 import com.meghalayaads.allads.user.response.registration.StatusResponse;
 import com.meghalayaads.allads.user.response.registration.UserRegResponse;
@@ -33,5 +34,8 @@ public interface RegistrationService {
 
     @POST(CommonRestURL.UPDATE_PASSWORD)
     Call<StatusResponse> updatePassword(@QueryMap HashMap<String,String> mQueryMap);
+
+    @POST(CommonRestURL.ADMIN_LOGIN_REQ)
+    Call<AdminLoginResponse> adminLoginReq(@QueryMap HashMap<String,String> mQueryMap);
 
 }

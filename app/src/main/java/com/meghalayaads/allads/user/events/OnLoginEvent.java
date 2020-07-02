@@ -1,5 +1,6 @@
 package com.meghalayaads.allads.user.events;
 
+import com.meghalayaads.allads.admin.response.AdminLoginResponse;
 import com.meghalayaads.allads.common.util.Error;
 import com.meghalayaads.allads.user.response.registration.UserRegResponse;
 
@@ -17,4 +18,10 @@ public interface OnLoginEvent {
 
     public void setErrorUI(ArrayList<Error> errors);
     public void setForgetPasswordUIError(ArrayList<Error> errors,String mobNo);
+
+
+    //admin login
+    public void onAdminLoginStart();
+    public void onAdminLoginSuccess(AdminLoginResponse response,String mobNo);
+    public void onAdminLoginFail(AdminLoginResponse response);
 }
