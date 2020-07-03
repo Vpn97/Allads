@@ -37,7 +37,7 @@ public class SettingFragmentViewModel extends AndroidViewModel {
         AdminServiceImpl.getService().getAdsPriceMstDtl(map).enqueue(new Callback<AdsPriceMastResponse>() {
             @Override
             public void onResponse(Call<AdsPriceMastResponse> call, Response<AdsPriceMastResponse> response) {
-                if(response.body().isStatus()){
+                if(response!=null && response.body()!=null && response.body().isStatus()){
                 if(response.body().getAdsPriceMsts()!=null)
                     liveData.setValue(response.body().getAdsPriceMsts());
                 }

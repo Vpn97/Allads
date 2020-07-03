@@ -20,6 +20,9 @@ import com.meghalayaads.allads.databinding.FragmentSettingsBinding;
 
 public class SettingFragment extends Fragment {
 
+
+public static final int REQ_EDIT_PRICE=12;
+
     private SettingFragmentViewModel model;
     private FragmentSettingsBinding mBinding;
     private AdminMst adminMst;

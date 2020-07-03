@@ -79,4 +79,10 @@
 
 
     <string name="rps">₹</string>
+    <string name="edit_ads_price">Edit advertisement prices</string>
+    <string name="key_ads_price_mst">key_ads_price_mst</string>
+    <string name="ads_time_limit">Ads time limit - Day</string>
+    <string name="reset_price">Reset price</string>
+    <string name="save">SAVE DETAILS</string>
+    <string name="plase_enter_valid_value">please enter valid value</string>
 </resources>
