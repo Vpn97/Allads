@@ -12,7 +12,6 @@ public class AllAdsFragmentViewModel extends AndroidViewModel {
     public AllAdsFragmentViewModel(@NonNull Application application) {
         super(application);
         this.application=application;
-
-
     }
+
 }

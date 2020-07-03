@@ -40,30 +40,30 @@
     <color name="back_update_password_undraw">#3f3d56</color>
     <color name="dialog_background_color">#94000000</color>
 
-    <color name="back_red">#ff616f</color>
+    <color name="back_red">#FFBAC0</color>
     <color name="text_red">#c4001d</color>
     
-    <color name="back_purpule">#ff5bff</color>
+    <color name="back_purpule">#FFC3FF</color>
     <color name="text_purpule">#9e00c5</color>
 
-    <color name="back_tint">#6effff</color>
+    <color name="back_tint">#C3FFFF</color>
     <color name="text_tint">#00b2cc</color>
 
 
-    <color name="back_green">#C9FF8B</color>
+    <color name="back_green">#E2FBC6</color>
     <color name="text_green">#32cb00</color>
 
-    <color name="back_yellow">#FFFF98</color>
+    <color name="back_yellow">#F4F4B2</color>
     <color name="text_yellow">#ffd600</color>
 
-    <color name="back_orange">#FAE8C5</color>
+    <color name="back_orange">#E4D4B4</color>
     <color name="text_orange">#c56200</color>
 
-    <color name="back_brown">#FFC8B7</color>
-    <color name="text_brown">#870000</color>
+    <color name="back_brown">#F4C9BC</color>
+    <color name="text_brown">#DA2323</color>
 
-    <color name="back_blue">#D1D6FF</color>
-    <color name="text_blue">#0043ca</color>
+    <color name="back_blue">#BDC1E4</color>
+    <color name="text_blue">#1655D5</color>
 
 
 

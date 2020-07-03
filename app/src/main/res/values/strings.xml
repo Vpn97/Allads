@@ -70,9 +70,13 @@
     <string name="title_setting">Setting</string>
     <string name="total_user">Total Users</string>
     <string name="total_ads">Active Ads</string>
-    <string name="price_per_word">Price per word</string>
+    <string name="price_per_word">Price per\nword ₹</string>
     <string name="price_per_img">Price per image</string>
     <string name="word_limit">Word limit</string>
-    <string name="lumpsum_amount">Lumpsum amount</string>
+    <string name="lumpsum_amount">Lumpsum\nprice ₹</string>
     <string name="lumpsum_word_limit">Lumpsum word limit</string>
+    <string name="time_limit">Time limit\nDay</string>
+
+
+    <string name="rps">₹</string>
 </resources>
