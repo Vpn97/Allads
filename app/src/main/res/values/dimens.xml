@@ -10,5 +10,7 @@
     <dimen name="sign_up_field_higth">52dp</dimen>
     <dimen name="text_heigth">32dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="report_title_font_size">20sp</dimen>
+    <dimen name="report_data_font_size">36sp</dimen>
 
 </resources>

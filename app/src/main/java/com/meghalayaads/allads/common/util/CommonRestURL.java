@@ -24,4 +24,8 @@ public class CommonRestURL {
     public static final String ADMIN_LOGIN_REQ="registration/adminLoginReq.php";
 
 
+    //admin
+    public static final String GET_ADMIN_REPORT="admin/getAdsReport.php";
+
+
 }

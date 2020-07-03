@@ -18,6 +18,7 @@
 
 
     <color name="blue_gray">#757575</color>
+    <color name="light_gray">#E4DFDF</color>
     <color name="black">#000000</color>
     <color name="black_text_color">#263238</color>
 
@@ -38,4 +39,32 @@
     <color name="back_grey">#f2f2f2</color>
     <color name="back_update_password_undraw">#3f3d56</color>
     <color name="dialog_background_color">#94000000</color>
+
+    <color name="back_red">#ff616f</color>
+    <color name="text_red">#c4001d</color>
+    
+    <color name="back_purpule">#ff5bff</color>
+    <color name="text_purpule">#9e00c5</color>
+
+    <color name="back_tint">#6effff</color>
+    <color name="text_tint">#00b2cc</color>
+
+
+    <color name="back_green">#C9FF8B</color>
+    <color name="text_green">#32cb00</color>
+
+    <color name="back_yellow">#FFFF98</color>
+    <color name="text_yellow">#ffd600</color>
+
+    <color name="back_orange">#FAE8C5</color>
+    <color name="text_orange">#c56200</color>
+
+    <color name="back_brown">#FFC8B7</color>
+    <color name="text_brown">#870000</color>
+
+    <color name="back_blue">#D1D6FF</color>
+    <color name="text_blue">#0043ca</color>
+
+
+
 </resources>
