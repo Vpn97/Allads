@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="mst"
+            type="com.meghalayaads.allads.admin.model.AdsPriceMst" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnCancel2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_hight"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/cancel"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmSave" />
+
+        <Button
+            android:id="@+id/btnConfirmSave"
+            style="@style/AppTheme.RoundedCornerMaterialButtonColored"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_hight"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/confirm_save"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLumpSumWordLimit" />
+
+        <TextView
+            android:id="@+id/tvWordLimit"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.wordLimit}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvLumpSumWordLimit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/tvLumpSumWordLimit"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.lumpSumWordLimit}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvTimeLimit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvWordLimit"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/tvTimeLimit"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.adsTimeLimitDays}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvLumpSumWordLimit"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/time_limit"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/tvPricePerImg" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/word_limit"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView13"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLumpSumAmount" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/lumpsum_word_limit"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView15"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/tvLumpSumAmount" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/lumpsum_amount"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdTypeTitle2" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/price_per_img"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdTypeTitle2" />
+
+        <TextView
+            android:id="@+id/txtAdTypeTitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/confirm_price_limit"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/popin"
+            android:text="@string/price_per_word"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccentLight"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAdTypeTitle2" />
+
+        <TextView
+            android:id="@+id/tvPricePerWord"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.amountPerWord}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvLumpSumAmount"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/tvLumpSumAmount"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.lumpSumAmount}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvPricePerImg"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvPricePerWord"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:id="@+id/tvPricePerImg"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@{mst.amountPerImg}"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvLumpSumAmount"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

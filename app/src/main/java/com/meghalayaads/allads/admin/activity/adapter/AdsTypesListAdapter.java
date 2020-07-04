@@ -1,8 +1,6 @@
 package com.meghalayaads.allads.admin.activity.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,8 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meghalayaads.allads.R;
-import com.meghalayaads.allads.admin.activity.ActivityAdsDetailsModify;
-import com.meghalayaads.allads.admin.activity.ui.settings.SettingFragment;
+import com.meghalayaads.allads.admin.event.SettingAdapterEvent;
 import com.meghalayaads.allads.admin.model.AdsPriceMst;
 import com.meghalayaads.allads.common.util.AdsConstant;
 import com.meghalayaads.allads.databinding.ItemAdsSettingsBinding;
@@ -31,10 +28,12 @@ public class AdsTypesListAdapter extends RecyclerView.Adapter<AdsTypesListAdapte
 
     private ArrayList<AdsPriceMst> adsPriceMsts;
     private Context context;
+    private SettingAdapterEvent event;
 
-    public AdsTypesListAdapter(ArrayList<AdsPriceMst> adsPriceMsts, Context context) {
+    public AdsTypesListAdapter(ArrayList<AdsPriceMst> adsPriceMsts, Context context, SettingAdapterEvent event) {
         this.adsPriceMsts = adsPriceMsts;
         this.context = context;
+        this.event =event;
     }
 
     @NonNull
@@ -78,9 +77,7 @@ public class AdsTypesListAdapter extends RecyclerView.Adapter<AdsTypesListAdapte
             }
 
             binding.getRoot().setOnClickListener(v -> {
-                Intent intent=new Intent(context, ActivityAdsDetailsModify.class);
-                intent.putExtra(context.getString(R.string.key_ads_price_mst),adsPriceMst);
-                ((Activity)context).startActivityForResult(intent, SettingFragment.REQ_EDIT_PRICE);
+                event.setActivityForResult(adsPriceMst);
             });
 
         }

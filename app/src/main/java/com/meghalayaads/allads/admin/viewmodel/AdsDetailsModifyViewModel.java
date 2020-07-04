@@ -6,6 +6,21 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.meghalayaads.allads.R;
+import com.meghalayaads.allads.admin.event.OnModifyAdsPriceEvent;
+import com.meghalayaads.allads.admin.model.AdsPriceMst;
+import com.meghalayaads.allads.admin.response.AdsPriceUpdateResponse;
+import com.meghalayaads.allads.admin.service.AdminService;
+import com.meghalayaads.allads.admin.service.AdminServiceImpl;
+import com.meghalayaads.allads.common.util.Error;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Allads
  * Created by Vishal Nagvadiya on 03-07-2020.
@@ -18,12 +33,53 @@ public class AdsDetailsModifyViewModel extends AndroidViewModel {
     private MutableLiveData<String> lumpSumWordLimit =new MutableLiveData<>();
     private MutableLiveData<String> pricePerImg=new MutableLiveData<>();
     private MutableLiveData<String> adsTimeLimitDays=new MutableLiveData<>();
+    private OnModifyAdsPriceEvent event;
+
+    private MutableLiveData<AdsPriceMst> adsPriceMstLiveData;
 
 
     public AdsDetailsModifyViewModel(@NonNull Application application) {
         super(application);
         this.application=application;
+       adsPriceMstLiveData=new MutableLiveData<>();
+       adsPriceMstLiveData.setValue(new AdsPriceMst());
     }
+
+
+
+    public void updateAdsPrice(String adminMobNo){
+
+        event.onStartUpdate();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("admin_id", String.valueOf(adsPriceMstLiveData.getValue().getAdminId()));
+        map.put("admin_mob", adminMobNo);
+        AdminService adminService= AdminServiceImpl.getService();
+
+        adminService.updateAdsPrices(map,adsPriceMstLiveData.getValue()).enqueue(new Callback<AdsPriceUpdateResponse>() {
+            @Override
+            public void onResponse(Call<AdsPriceUpdateResponse> call, Response<AdsPriceUpdateResponse> response) {
+                    if(response.body()!=null && response.body().isStatus() && response.body().getAdsPriceMst()!=null){
+                        event.onSuccess(response.body());
+                    }else{
+                        if(response.body().getErrors()!=null && !response.body().getErrors().isEmpty()){
+                            event.onFail(response.body().getErrors());
+                        }else{
+                            ArrayList<Error> errors=new ArrayList<>();
+                            errors.add(new Error("UPDATE001",application.getString(R.string.server_error),"ADMIN"));
+                            event.onFail(errors);
+                        }
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<AdsPriceUpdateResponse> call, Throwable t) {
+                ArrayList<Error> errors=new ArrayList<>();
+                errors.add(new Error("UPDATE002",t.getMessage(),"ADMIN"));
+                event.onFail(errors);
+            }
+        });
+    }
+
 
 
     public Application getApplication() {
@@ -80,5 +136,21 @@ public class AdsDetailsModifyViewModel extends AndroidViewModel {
 
     public void setAdsTimeLimitDays(MutableLiveData<String> adsTimeLimitDays) {
         this.adsTimeLimitDays = adsTimeLimitDays;
+    }
+
+    public MutableLiveData<com.meghalayaads.allads.admin.model.AdsPriceMst> getAdsPriceMstLiveData() {
+        return adsPriceMstLiveData;
+    }
+
+    public void setAdsPriceMstLiveData(MutableLiveData<com.meghalayaads.allads.admin.model.AdsPriceMst> adsPriceMstLiveData) {
+        this.adsPriceMstLiveData = adsPriceMstLiveData;
+    }
+
+    public OnModifyAdsPriceEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(OnModifyAdsPriceEvent event) {
+        this.event = event;
     }
 }

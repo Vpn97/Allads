@@ -1,12 +1,14 @@
 package com.meghalayaads.allads.admin.service;
 
-import com.meghalayaads.allads.admin.response.AdsPriceMastResponse;
+import com.meghalayaads.allads.admin.response.AdsPriceMstResponse;
+import com.meghalayaads.allads.admin.response.AdsPriceUpdateResponse;
 import com.meghalayaads.allads.common.util.CommonRestURL;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
@@ -21,5 +23,8 @@ public interface AdminService {
 
 
     @POST(CommonRestURL.GET_ADS_PRICE_MST)
-    Call<AdsPriceMastResponse> getAdsPriceMstDtl(@QueryMap HashMap<String,String> mQueryMap);
+    Call<AdsPriceMstResponse> getAdsPriceMstDtl(@QueryMap HashMap<String,String> mQueryMap);
+
+    @POST(CommonRestURL.UPDATE_ADS_PRICE)
+    Call<AdsPriceUpdateResponse> updateAdsPrices(@QueryMap HashMap<String,String> mQueryMap, @Body com.meghalayaads.allads.admin.model.AdsPriceMst priceMst);
 }

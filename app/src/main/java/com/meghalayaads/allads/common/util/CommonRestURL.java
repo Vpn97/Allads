@@ -27,4 +27,5 @@ public class CommonRestURL {
     //admin
     public static final String GET_ADMIN_REPORT="admin/getAdsReport.php";
     public static final String GET_ADS_PRICE_MST = "admin/getAdsPriceMst.php";
+    public static final String UPDATE_ADS_PRICE = "admin/updateAdsPrices.php";
 }

@@ -15,10 +15,10 @@ import java.util.Date;
 public class AdsPriceMst implements Parcelable {
 
     @SerializedName("ads_price_mst_id")
-    private String adsPriceMstId;
+    private int adsPriceMstId;
 
-    @SerializedName("user_type_id ")
-    private String userTypeId;
+    @SerializedName("user_type_id")
+    private int userTypeId;
 
     @SerializedName("user_type")
     private UserType userType;
@@ -39,7 +39,7 @@ public class AdsPriceMst implements Parcelable {
     private String lumpSumWordLimit;
 
     @SerializedName("admin_id")
-    private String adminId;
+    private int adminId;
 
     @SerializedName("is_active")
     private boolean isActive;
@@ -57,9 +57,9 @@ public class AdsPriceMst implements Parcelable {
     public AdsPriceMst() {
     }
 
-    public AdsPriceMst(String adsPriceMstId, String userTypeId, UserType userType, String amountPerWord,
+    public AdsPriceMst(int adsPriceMstId, int userTypeId, UserType userType, String amountPerWord,
                        String amountPerImg, String wordLimit, String lumpSumAmount, String lumpSumWordLimit,
-                       String adminId, boolean isActive, Date createdDate, Date updatedDate, String adsTimeLimitDays) {
+                       int adminId, boolean isActive, Date createdDate, Date updatedDate, String adsTimeLimitDays) {
         this.adsPriceMstId = adsPriceMstId;
         this.userTypeId = userTypeId;
         this.userType = userType;
@@ -77,30 +77,30 @@ public class AdsPriceMst implements Parcelable {
 
 
     protected AdsPriceMst(Parcel in) {
-        adsPriceMstId = in.readString();
-        userTypeId = in.readString();
+        adsPriceMstId = in.readInt();
+        userTypeId = in.readInt();
         userType = in.readParcelable(UserType.class.getClassLoader());
         amountPerWord = in.readString();
         amountPerImg = in.readString();
         wordLimit = in.readString();
         lumpSumAmount = in.readString();
         lumpSumWordLimit = in.readString();
-        adminId = in.readString();
+        adminId = in.readInt();
         isActive = in.readByte() != 0;
         adsTimeLimitDays = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(adsPriceMstId);
-        dest.writeString(userTypeId);
+        dest.writeInt(adsPriceMstId);
+        dest.writeInt(userTypeId);
         dest.writeParcelable(userType, flags);
         dest.writeString(amountPerWord);
         dest.writeString(amountPerImg);
         dest.writeString(wordLimit);
         dest.writeString(lumpSumAmount);
         dest.writeString(lumpSumWordLimit);
-        dest.writeString(adminId);
+        dest.writeInt(adminId);
         dest.writeByte((byte) (isActive ? 1 : 0));
         dest.writeString(adsTimeLimitDays);
     }
@@ -122,19 +122,19 @@ public class AdsPriceMst implements Parcelable {
         }
     };
 
-    public String getAdsPriceMstId() {
+    public int getAdsPriceMstId() {
         return adsPriceMstId;
     }
 
-    public void setAdsPriceMstId(String adsPriceMstId) {
+    public void setAdsPriceMstId(int adsPriceMstId) {
         this.adsPriceMstId = adsPriceMstId;
     }
 
-    public String getUserTypeId() {
+    public int getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUserTypeId(String userTypeId) {
+    public void setUserTypeId(int userTypeId) {
         this.userTypeId = userTypeId;
     }
 
@@ -186,11 +186,11 @@ public class AdsPriceMst implements Parcelable {
         this.lumpSumWordLimit = lumpSumWordLimit;
     }
 
-    public String getAdminId() {
+    public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
 

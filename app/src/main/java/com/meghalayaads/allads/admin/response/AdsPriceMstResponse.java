@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Allads
  * Created by Vishal Nagvadiya on 03-07-2020.
  */
-public class AdsPriceMastResponse implements Parcelable {
+public class AdsPriceMstResponse implements Parcelable {
 
     @SerializedName("status")
     private boolean status;
@@ -25,17 +25,17 @@ public class AdsPriceMastResponse implements Parcelable {
     private ArrayList<AdsPriceMst> adsPriceMsts;
 
 
-    public AdsPriceMastResponse(boolean status, ArrayList<Error> errors, ArrayList<AdsPriceMst> adsPriceMsts) {
+    public AdsPriceMstResponse(boolean status, ArrayList<Error> errors, ArrayList<AdsPriceMst> adsPriceMsts) {
         this.status = status;
         this.errors = errors;
         this.adsPriceMsts = adsPriceMsts;
     }
 
 
-    public AdsPriceMastResponse() {
+    public AdsPriceMstResponse() {
     }
 
-    protected AdsPriceMastResponse(Parcel in) {
+    protected AdsPriceMstResponse(Parcel in) {
         status = in.readByte() != 0;
         errors = in.createTypedArrayList(Error.CREATOR);
         adsPriceMsts = in.createTypedArrayList(AdsPriceMst.CREATOR);
@@ -53,15 +53,15 @@ public class AdsPriceMastResponse implements Parcelable {
         return 0;
     }
 
-    public static final Creator<AdsPriceMastResponse> CREATOR = new Creator<AdsPriceMastResponse>() {
+    public static final Creator<AdsPriceMstResponse> CREATOR = new Creator<AdsPriceMstResponse>() {
         @Override
-        public AdsPriceMastResponse createFromParcel(Parcel in) {
-            return new AdsPriceMastResponse(in);
+        public AdsPriceMstResponse createFromParcel(Parcel in) {
+            return new AdsPriceMstResponse(in);
         }
 
         @Override
-        public AdsPriceMastResponse[] newArray(int size) {
-            return new AdsPriceMastResponse[size];
+        public AdsPriceMstResponse[] newArray(int size) {
+            return new AdsPriceMstResponse[size];
         }
     };
 
@@ -85,7 +85,7 @@ public class AdsPriceMastResponse implements Parcelable {
         return adsPriceMsts;
     }
 
-    public void setAdsPriceMsts(ArrayList<AdsPriceMst> adsPriceMsts) {
+    public void setAdsPriceMsts(ArrayList<com.meghalayaads.allads.admin.model.AdsPriceMst> adsPriceMsts) {
         this.adsPriceMsts = adsPriceMsts;
     }
 }
