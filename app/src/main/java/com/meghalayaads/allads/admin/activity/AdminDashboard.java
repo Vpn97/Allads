@@ -1,9 +1,14 @@
 package com.meghalayaads.allads.admin.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -17,6 +22,7 @@ import com.meghalayaads.allads.R;
 import com.meghalayaads.allads.admin.model.AdminMst;
 import com.meghalayaads.allads.common.util.DataStorage;
 import com.meghalayaads.allads.databinding.ActivityAdminDashboardBinding;
+import com.meghalayaads.allads.user.activity.registration.ActivityLogin;
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -58,6 +64,45 @@ public class AdminDashboard extends AppCompatActivity {
     private void setEvent() {
 
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.admin_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.menu_admin_logout){
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.are_you_sure_logout));
+
+            builder.setPositiveButton(getString(R.string.logout), (dialog, which) -> {
+                SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(getResources().getString(R.string.key_user_data), 0).edit();
+                editor.clear();
+                editor.commit();
+
+                Intent intent=new Intent(getApplicationContext(), ActivityLogin.class);
+                startActivity(intent);
+                finish();
+            });
+
+            builder.setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
+                builder.create().dismiss();
+            });
+            builder.create().show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

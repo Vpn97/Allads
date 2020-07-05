@@ -258,7 +258,7 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
                                 android:maxLines="1"
-                                android:nextFocusDown="@id/txtAdsDayLimit"
+                                android:nextFocusUp="@id/txtAdsDayLimit"
                                 android:text="@={model.pricePerImg}"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -281,6 +281,7 @@
                                 android:hint="@string/ads_time_limit"
                                 android:inputType="number"
                                 android:maxLines="1"
+                                android:imeOptions="actionDone"
                                 android:text="@={model.adsTimeLimitDays}"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />

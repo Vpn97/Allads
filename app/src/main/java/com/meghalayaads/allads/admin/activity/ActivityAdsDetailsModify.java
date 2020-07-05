@@ -84,6 +84,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                  binding.txtPricePerWord.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
         });
 
 
@@ -95,6 +96,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                     binding.txtLumpSumAmount.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
         });
 
 
@@ -106,6 +108,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                     binding.txtPricePerImg.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
         });
 
 
@@ -118,6 +121,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                     binding.txtWordLimit.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
 
         });
 
@@ -131,6 +135,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                     binding.txtAdsDayLimit.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
         });
 
         model.getLumpSumWordLimit() .observe(this, s -> {
@@ -141,6 +146,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
                 }catch (Exception e){
                     binding.txtLumpSumWordLimit.setError(getString(R.string.plase_enter_valid_value));
                 }
+            validateField();
         });
 
 
@@ -159,6 +165,7 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
         model.getAdsPriceMstLiveData().getValue().setAdsPriceMstId(adsPriceMst.getAdsPriceMstId());
         model.getAdsPriceMstLiveData().getValue().setCreatedDate(new Date());
 
+        validateField();
 
         binding.btnCancel.setOnClickListener(v -> {
             setResult(RESULT_CANCELED);
@@ -238,17 +245,34 @@ public class ActivityAdsDetailsModify extends AppCompatActivity implements OnMod
             final View errorView = inflater.inflate(R.layout.dialog_price_update_error, null);
             builder.setView(errorView);
 
+            AlertDialog alertDialog=builder.create();
+
             Error error=errors.get(0);
             TextView view=errorView.findViewById(R.id.txtError);
             view.setText(error.getMessage());
             Button btnOk = errorView.findViewById(R.id.btnOk);
-            btnOk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    builder.create().dismiss();
-                }
+            btnOk.setOnClickListener(v -> {
+                alertDialog.dismiss();
             });
-            builder.create().show();
+            alertDialog.show();
+        }
+    }
+
+
+
+    public void validateField(){
+
+        try {
+            double d1= Double.parseDouble(binding.txtPricePerWord.getEditText().getText().toString());
+            double d2= Double.parseDouble(binding.txtPricePerImg.getEditText().getText().toString());
+            double d3= Double.parseDouble(binding.txtLumpSumAmount.getEditText().getText().toString());
+            int v1= Integer.parseInt(binding.txtWordLimit.getEditText().getText().toString());
+            int v2= Integer.parseInt(binding.txtLumpSumWordLimit.getEditText().getText().toString());
+            int v3= Integer.parseInt(binding.txtAdsDayLimit.getEditText().getText().toString());
+
+            binding.btnSave.setEnabled(true);
+        }catch (Exception e){
+            binding.btnSave.setEnabled(false);
         }
     }
 

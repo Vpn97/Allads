@@ -91,4 +91,7 @@
     <string name="error">ERROR !!</string>
     <string name="ok">OK</string>
     <string name="server_error">Sever error please try agin later</string>
+    <string name="menu_admin_logout">Logout</string>
+    <string name="are_you_sure_logout">Are you sure want to logout ?</string>
+    <string name="logout">Logout</string>
 </resources>

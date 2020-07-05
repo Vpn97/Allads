@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/adText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="8dp"
+        android:text="What youll do The Walmart Global eCommerce team is responsible for building and enhancing the next generation global eCommerce capabilities for our rapidly expanding customer base. This role will helpin accelerating our SEO roadmap and working with the SEObusinessteam to drive and measure the impact of our SEO related initiatives. Aspart of thePartner Ecosystemteam, you will work jointly with the Director of Product Management to define and implementSEOstrategiesin partnership with the SEO businessand engineeringteams.With one of the largest product catalogues in the eCommerce space"
+        android:textAlignment="textStart"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/adImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_undraw_password_update" />
+</androidx.constraintlayout.widget.ConstraintLayout>

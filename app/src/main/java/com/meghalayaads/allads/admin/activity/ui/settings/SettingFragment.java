@@ -85,7 +85,7 @@ public static final int REQ_EDIT_PRICE=12;
         if(resultCode== Activity.RESULT_OK){
             if(requestCode==REQ_EDIT_PRICE){
                 Toast.makeText(getContext(), "Ads price updated", Toast.LENGTH_SHORT).show();
-               //TODO update apdater
+               //TODO update adapter
                 if(null!=data && null!=data.getParcelableExtra(getString(R.string.key_ads_price_mst))){
 
                 }else{
