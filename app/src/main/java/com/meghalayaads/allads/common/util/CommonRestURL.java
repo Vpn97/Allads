@@ -13,6 +13,7 @@ public class CommonRestURL {
 
     //common
     public static final String GET_USER_TYPES="common/getUserTypes.php";
+    public static final String GET_ADS_PAGINATION="ads/geAdsPagination.php";
 
 
     //registration

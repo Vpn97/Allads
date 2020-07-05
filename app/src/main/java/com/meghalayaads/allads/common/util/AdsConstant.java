@@ -14,7 +14,8 @@ public class AdsConstant {
 
 
     public static final String TAG = "ApkZube";
-
+    public static final Integer PER_PAGE_ADS = 10;
+    public static final Integer PER_PAGE_ADS_INIT = 10;
 
 
     public static Integer[] getColorList(int index){
