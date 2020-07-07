@@ -5,21 +5,21 @@
 
     <data>
 
+        <variable
+            name="mst"
+            type="com.meghalayaads.allads.common.model.AdMst" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardElevation="2dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -39,13 +39,14 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:id="@+id/imgUser"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:srcCompat="@tools:sample/avatars" />
+                            tools:srcCompat="@mipmap/man_2" />
 
                         <TextView
                             android:id="@+id/txtUserName"
@@ -55,12 +56,13 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="Vishal Navadiya"
-                            android:textSize="18sp"
+                            android:text="@{mst.userDtl.userName}"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="14sp"
                             app:layout_constraintBottom_toTopOf="@+id/txtCat"
                             app:layout_constraintEnd_toStartOf="@+id/txtTimeAgo"
                             app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/imageView6"
+                            app:layout_constraintStart_toEndOf="@+id/imgUser"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
@@ -69,19 +71,20 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginBottom="8dp"
-                            android:fontFamily="@font/popin"
-                            android:text="Compnay Type"
-                            android:textSize="14sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@{mst.categoryDtl.categoryName}"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView6"
+                            app:layout_constraintStart_toEndOf="@+id/imgUser"
                             app:layout_constraintTop_toBottomOf="@+id/txtUserName" />
 
                         <TextView
                             android:id="@+id/txtSubCat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="1dp"
-                            android:text="Techer Job"
+                            android:fontFamily="@font/font"
+                            android:text="@{` | `+ mst.subCategoryDtl.subCategoryName}"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtCat"
                             app:layout_constraintStart_toEndOf="@+id/txtCat"
@@ -93,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/font"
-                            android:text="12 hr ago"
+                            android:text="@{mst.timeSpan}"
                             app:layout_constraintBottom_toBottomOf="@+id/txtUserName"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -114,8 +117,8 @@
 
                     <ImageView
                         android:id="@+id/btnWhatsapp"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -125,8 +128,8 @@
 
                     <ImageView
                         android:id="@+id/btnFacebook"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,8 +139,8 @@
 
                     <ImageView
                         android:id="@+id/btnInsta"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -147,38 +150,52 @@
 
                     <ImageView
                         android:id="@+id/btnTwiter"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/btnInsta"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_twitter" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:tint="@color/colorAccentLight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_round_location_on_24" />
+
+                    <TextView
+                        android:id="@+id/txtCity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/font"
+                        android:maxLines="1"
+                        android:text="@{mst.location}"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                        app:layout_constraintEnd_toStartOf="@+id/btnTwiter"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/imgAd"
-                    android:layout_width="wrap_content"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerAdContent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                    app:srcCompat="@drawable/ic_undraw_to_do_xvvc" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-                <!--   <androidx.viewpager2.widget.ViewPager2
-                       android:id="@+id/viewPagerAdContent"
-                       android:layout_width="393dp"
-                       android:layout_height="230dp"
-                       android:pointerIcon="arrow"
-                       app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       app:layout_constraintStart_toStartOf="parent"
-                       app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />-->
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

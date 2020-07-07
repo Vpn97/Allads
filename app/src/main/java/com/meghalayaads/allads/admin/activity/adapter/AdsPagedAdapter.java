@@ -1,25 +1,24 @@
 package com.meghalayaads.allads.admin.activity.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.meghalayaads.allads.R;
+import com.meghalayaads.allads.common.model.AdContent;
 import com.meghalayaads.allads.common.model.AdMst;
+import com.meghalayaads.allads.common.util.AdShareUtil;
+import com.meghalayaads.allads.common.util.AdUtil;
+import com.meghalayaads.allads.common.util.AdsConstant;
 import com.meghalayaads.allads.databinding.ItemAdLayoutBinding;
+
+import java.util.ArrayList;
 
 /**
  * Allads
@@ -47,9 +46,58 @@ public class AdsPagedAdapter extends PagedListAdapter<AdMst,AdsPagedAdapter.AdMs
     @Override
     public void onBindViewHolder(@NonNull AdMstViewHolder holder, int position) {
         AdMst mst=getItem(position);
-        if(mst!=null)
-        holder.SetData(mst);
+        if(mst!=null) {
+            holder.SetData(mst);
+            //Toast.makeText(context, "size : "+AdUtil.getAdContentFromAdMst(mst).size(), Toast.LENGTH_SHORT).show();
+
+            ArrayList<AdContent> adContents=AdUtil.getAdContentFromAdMst(mst);
+            AdViewPagerAdapter pagerAdapter=new AdViewPagerAdapter(adContents,context);
+            holder.mBinding.viewPagerAdContent.setAdapter(pagerAdapter);
+
+            setShareBtnClicks(holder.mBinding,mst,adContents);
+
+
+            holder.mBinding.viewPagerAdContent.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+
+                    pagerAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    /*View view=  holder.mBinding.viewPagerAdContent.getChildAt(position);
+                    if(view!=null)
+                    view.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            int wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY);
+                            int hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                            view.measure(wMeasureSpec, hMeasureSpec);
+                            if (holder.mBinding.viewPagerAdContent.getLayoutParams().height != view.getMeasuredHeight()) {
+                                // ParentViewGroup is, for example, LinearLayout
+                                // ... or whatever the parent of the ViewPager2 is
+                                ConstraintLayout.LayoutParams params= new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,view.getMeasuredHeight());
+                                holder.mBinding.viewPagerAdContent.setLayoutParams(params);
+                            }
+                        }
+                    });*/
+                    pagerAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                    super.onPageScrollStateChanged(state);
+                }
+            });
+        }
     }
+
+
 
     public class AdMstViewHolder extends RecyclerView.ViewHolder{
 
@@ -61,36 +109,50 @@ public class AdsPagedAdapter extends PagedListAdapter<AdMst,AdsPagedAdapter.AdMs
         }
 
         public void SetData(AdMst mst){
+            /*
             mBinding.txtUserName.setText(mst.getUserDtl().getUserName());
             mBinding.txtCat.setText(mst.getCategoryDtl().getCategoryName());
             mBinding.txtSubCat.setText(mst.getSubCategoryDtl().getSubCategoryName());
-            mBinding.txtTimeAgo.setText(mst.getCreatedDate().toLocaleString());
+            mBinding.txtTimeAgo.setText(mst.getCreatedDate().toLocaleString());*/
+            mBinding.imgUser.setImageResource(AdsConstant.getRandomAvatar());
+            mBinding.setMst(mst);
 
-
-            if(null!=mst.getImages() && !mst.getImages().isEmpty()) {
-                Glide.with(context)
-                        .load(Uri.parse(mst.getImages() .get(0).getImgURL()))
-                        .thumbnail(Glide // this thumbnail request has to have the same RESULT cache key
-                                .with(context) // as the outer request, which usually simply means
-                                .load(Uri.parse(mst.getImages() .get(0).getImgURL())) // same size/transformation(e.g. centerCrop)/format(e.g. asBitmap)
-                                .fitCenter())
-                        .listener(new RequestListener<Drawable>() {
-                            @Override
-                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                //mBinding.wallpaperLoading.setVisibility(View.INVISIBLE);
-                                return false;
-                            }
-
-                            @Override
-                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                return false;
-                            }
-                        })
-                        .into(mBinding.imgAd);
-            }else{
 
             }
-        }
 
     }
+
+
+    private void setShareBtnClicks(ItemAdLayoutBinding mBinding, AdMst mst,ArrayList<AdContent> adContents) {
+
+
+
+        mBinding.btnFacebook.setOnClickListener(v->{
+            int index =mBinding.viewPagerAdContent.getCurrentItem();
+            AdContent currentContent=adContents.get(index);
+            AdShareUtil.shareAdPost(context,currentContent,mst,AdShareUtil.FACEBOOK);        });
+
+
+        mBinding.btnWhatsapp.setOnClickListener(v -> {
+            int index =mBinding.viewPagerAdContent.getCurrentItem();
+            AdContent currentContent=adContents.get(index);
+            AdShareUtil.shareAdPost(context,currentContent,mst,AdShareUtil.WHATSAPP);
+        });
+
+        mBinding.btnInsta.setOnClickListener(v -> {
+            int index =mBinding.viewPagerAdContent.getCurrentItem();
+            AdContent currentContent=adContents.get(index);
+            AdShareUtil.shareAdPost(context,currentContent,mst,AdShareUtil.INSTAGRAM);
+        });
+
+        mBinding.btnTwiter.setOnClickListener(v -> {
+            int index =mBinding.viewPagerAdContent.getCurrentItem();
+            AdContent currentContent=adContents.get(index);
+            AdShareUtil.shareAdPost(context,currentContent,mst,AdShareUtil.TWITTER);
+        });
+
+    }
+
+
+
 }

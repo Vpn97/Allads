@@ -5,6 +5,7 @@ import com.meghalayaads.allads.R;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Allads
@@ -16,6 +17,9 @@ public class AdsConstant {
     public static final String TAG = "ApkZube";
     public static final Integer PER_PAGE_ADS = 10;
     public static final Integer PER_PAGE_ADS_INIT = 10;
+
+
+
 
 
     public static Integer[] getColorList(int index){
@@ -40,5 +44,16 @@ public class AdsConstant {
 
         return colors.get(index%hashMap.size());
     }
+
+    public static int getRandomAvatar(){
+        Integer[] res=new Integer[4];
+        res[0]=R.mipmap.man;
+        res[1]=R.mipmap.man_2;
+        res[2]=R.mipmap.women;
+        res[3]=R.mipmap.women_2;
+        Random random = new Random();
+        return res[random.nextInt(res.length)];
+    }
+
 
 }

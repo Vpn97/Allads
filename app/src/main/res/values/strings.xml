@@ -94,4 +94,7 @@
     <string name="menu_admin_logout">Logout</string>
     <string name="are_you_sure_logout">Are you sure want to logout ?</string>
     <string name="logout">Logout</string>
+    <string name="download_now">"Download Allads app : "</string>
+    <string name="share_subject">Share ads from Allads</string>
+    <string name="share_using">share ads using :</string>
 </resources>
